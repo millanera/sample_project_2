@@ -1,0 +1,236 @@
+    /* FUNCTIONS & VARIABLES */
+    
+    $colors: ( primary: #8FC7C4, accent:#6F807F, primary-light: lighten(#8FC7C4, 40px), primary-dark: darken(#8FC7C4, 40px));
+    $padding:15px;
+    $margintop:20px 0 0 0;
+    $borders:10px;
+    @function color($color-name) {
+        @return map-get($colors, $color-name)
+    }
+    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+    
+    $desktop: 840px;
+    @mixin desktop {
+        @media (min-width: #{$desktop}) {
+            @content;
+        }
+    }
+    
+    body,
+    html {
+        height: 100%;
+    }
+    
+    body {
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        margin: 0;
+        #bg {
+            clip-path: polygon(100% 0, 100% 80%, 38% 100%, 0 100%, 0 0);
+            background-color: color(primary);
+            width: 100%;
+            height: 100%;
+            padding-bottom: 1100px;
+            position: absolute;
+            z-index: -1;
+            @include desktop {
+                clip-path: polygon(0 0, 77% 0, 50% 100%, 0% 100%);
+                padding-bottom: 0px;
+            }
+        }
+        header {
+            text-align: center;
+            @include desktop {
+                text-align: left;
+            }
+        }
+        .logo img {
+            display: inline-block;
+            width: 60px;
+            margin: 30px;
+            cursor: pointer;
+        }
+    }
+    
+    main {
+        @include desktop {
+            display: grid;
+            grid-template-columns: 50% auto;
+            grid-template-areas: "primary card";
+        }
+        /* FADE IN */
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @-moz-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            -webkit-animation: fadeIn ease-in 1;
+            -moz-animation: fadeIn ease-in 1;
+            animation: fadeIn ease-in 1;
+            -webkit-animation-fill-mode: forwards;
+            -moz-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            -webkit-animation-duration: 0.3s;
+            -moz-animation-duration: 0.3s;
+            animation-duration: 0.3s;
+        }
+        .fade-in.one {
+            -webkit-animation-delay: 0.1s;
+            -moz-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+        }
+        .fade-in.two {
+            -webkit-animation-delay: 0.3s;
+            -moz-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+        .fade-in.three {
+            -webkit-animation-delay: 0.5s;
+            -moz-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+        section#card {
+            background: #fff;
+            padding: 20px;
+            margin: 4em auto;
+            border-radius: $borders;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+            width: 80%;
+            @include desktop {
+                grid-area: card;
+                height: fit-content;
+                align-self: center;
+                margin: 3em auto;
+            }
+            .mapWrapper {
+                position: relative;
+                padding-bottom: 66.6666667%;
+                height: 0;
+                iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .overlay {
+                background: transparent;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+        }
+        section#primary {
+            color: #fff;
+            padding: $padding;
+            text-align: center;
+            @include desktop {
+                grid-area: primary;
+                text-align: left;
+                margin: 3em 0 0 4em;
+            }
+            h1 {
+                color: #537271;
+                text-align: center;
+                font-size: 3em;
+                text-transform: uppercase;
+                @include desktop {
+                    margin-top: 20px;
+                    font-size: 4em;
+                    line-height: .9em;
+                }
+            }
+            .flexcontainer {
+                display: flex;
+                flex-direction: column;
+            }
+            .item {
+                display: flex;
+                align-items: center;
+                @include desktop {
+                    justify-content: space-evenly;
+                }
+            }
+            .icon-background {
+                width: 45px;
+                background-color: #ABFFFB;
+                border-radius: 160px;
+                margin: 20px;
+                .img-icon {
+                    display: block;
+                    padding: 0 0px 0px 10px;
+                }
+            }
+            p {
+                font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                font-size: 1em;
+                @include desktop {
+                    width: 70%;
+                }
+            }
+            .box {
+                font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                background-color: var(--background-color);
+                border-radius: $borders;
+                margin-top: 50px;
+                font-size: 1em;
+                font-weight: 400;
+                text-transform: uppercase;
+                border: none;
+                outline: none;
+                position: relative;
+                cursor: pointer;
+                padding: $padding 50px $padding 50px;
+                display: inline-block;
+                transition: 1s;
+                --background-color: #537271;
+                --border-size: 1.5px;
+            }
+            .box.diagonal-right {
+                background-image: linear-gradient(to bottom right, #fff 49.5%, #537271 50%);
+                background-size: 300% 200%;
+                background-position: bottom right;
+            }
+            .box.diagonal-right:hover {
+                background-position: top left;
+                a {
+                    color: black;
+                }
+            }
+            .center {
+                text-align: center;
+            }
+            a {
+                text-decoration: none;
+                text-transform: uppercase;
+                color: #fff;
+            }
+        }
+    }
